@@ -192,7 +192,7 @@
         	* Entries 5-128
         * Secundary GPT Header
 
-<img width="400" alt="gpt" src="https://user-images.githubusercontent.com/66706870/131202341-190626e9-8288-4bf8-8071-438fc0d0ff7f.png">
+<img width="420" alt="gpt" src="https://user-images.githubusercontent.com/66706870/131202341-190626e9-8288-4bf8-8071-438fc0d0ff7f.png">
 
 **Bootloader**:
    * GRUB (uefi) - grub4.efi + módulos (/boot)
@@ -209,17 +209,7 @@
 
 **Modelo Mental:**
 
-                Módulos GRUB
-		     ↑
-                     |
-BIOS ---→ MBR ---→ GRUB ---→ initrd   ---→   FS virtual
-  ↑                 ↑ |        /                ↑
-  |        _________| |    ___/          _______| 
-  |       |           ↓   /             /
-POST    shim        kernel ----------------» init
-  |_____  |  ______/  |
-        ↓ | /         ↓
-        UEFI       FS real ---→ systemd ---→ serviços
+<img width="569" alt="modelo_mental" src="https://user-images.githubusercontent.com/66706870/131203145-43facd54-9ca2-42f8-ba93-d6f95f78e522.png">
 
 1. POST: Power On Self Test 
    * Testa se tem memória, se tem placa de vídeo, se barramentos estão ok, ...
@@ -228,6 +218,7 @@ POST    shim        kernel ----------------» init
 
 > Com BIOS:
 2. Roda programas da BIOS (roda outros testes) - verifica qual é o primeiro dispositivo de boot (até achar MBR)
+
 3. BIOS acessa conteúdo do MBR (Master Boot Record - 446 bytes localizados no primeiro dispositivo da memória) - Objetivo do MBR é carregar o GRUB
 
 4. GRUB é o bootloader
@@ -235,6 +226,7 @@ POST    shim        kernel ----------------» init
 > Com UEFI:
 2. Roda programas da UEFI (programa executável no formato PE) -> UEFI consegue rodar o GRUB diretamente. Se tiver secure-boot, a UEFI roda o shim (pré-bootloader assinado digitalmente que acessa o GRUB). É possível que a UEFI carregue diretamente o kernel + initrd sem precisar de GRUB
 
+> Ambos:
 5. GRUB procura por um arquivo de configuração (+ módulos GRUB) e carrega o initrd e prepara um sistema de arquivos virtual. Além disso, o GRUB também carrega o kernel. O kernel em funcionamento monta o sistema de arquivos virtual na sua estrutura de diretórios. No FS virtual existe um script chamado "init" que permite com que o kernel carregue alguns módulos necessários para montar o FS real.
 
 6. Com o diretório / montado, o primeiro programa a rodar é o systemd, que coloca todos os serviços configurados em funcionamento.
@@ -243,15 +235,17 @@ POST    shim        kernel ----------------» init
 
 ## A_009 - Princípios do UNIX <a name="a009"></a>
 
-1965 -> Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
-1969 -> Unics (Depois renomeado para Unix) - Linguagem Assembly
-1973 -> Unix - Linguagem C
+> 1965 -> Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
 
-> Ideias:
+> 1969 -> Unics (Depois renomeado para Unix) - Linguagem Assembly
+
+> 1973 -> Unix - Linguagem C
+
+**Ideias**:
    * Programas devem fazer uma única coisa, mas fazer isso muito bem! (keep it simple)
    * Programas devem conversar entre si e e trabalhar juntos! (saída de um programa = entrada de outro programa - pipe)
 
-> Abstração: 
+**Abstração**: 
    * Tudo é representado por arquivos (arquivos, diretórios, hardware, processos, etc).
    * Estrutura em árvore hierárquica (base é o diretório /). FHS - Filesystem Hierarchy Standard.
 
@@ -263,31 +257,52 @@ REF: [https://refspecs.linuxfoundation.org/fhs.shtml]
      [https://www.debian.org/releases/stable/amd64/apcs02.en.html]
 
 > Origem: 1996, comunidade BSD 
+
 > Objetivo: Uniformização (sistemas Unix-like)
+
 > Mantido hoje pela Linux Foundation
 
-* Principais Diretórios:
-/          → diretório barra ou raiz
-    /proc  → processos (info dos processos em execução e do sistema)
-    /dev   → dispositivos (hd, pendrive, mouse, teclado, etc)
-    /boot  → kernel, initrd (arquivos do GRUB)
-    /bin   → binários (E) (essenciais pro sistema)
-    /sbin  → binários adm (essenciais para adm do sistema)
-    /lib   → bibliotécas (libs usadas pelos binários /bin e /sbin)
-    /etc   → configuração (configs dos programas)
-    /media → removíveis (aqui são montados os conteúdos de removíveis)
-    /mnt   → temporários (serve para montagens de dispositivos temporários para uso do administrador)
-    /root  → usuário root
-    /home  → usuários (cada usuário possui sua pasta)
-    /tmp   → temporário (serve para armazenar arquivos temporários)
-    /var   → variável (geralemnte conteúdo é apagado ao reiniciar o sistema) - possui: /log
+**Principais Diretórios**:
+
+**/**          → diretório barra ou raiz
+
+**/proc**  → processos (info dos processos em execução e do sistema)
+
+**/dev**   → dispositivos (hd, pendrive, mouse, teclado, etc)
+
+**/boot**  → kernel, initrd (arquivos do GRUB)
+
+**/bin**   → binários (E) (essenciais pro sistema)
+
+**/sbin**  → binários adm (essenciais para adm do sistema)
+
+**/lib**   → bibliotécas (libs usadas pelos binários /bin e /sbin)
+
+**/etc**   → configuração (configs dos programas)
+
+**/media** → removíveis (aqui são montados os conteúdos de removíveis)
+
+**/mnt**   → temporários (serve para montagens de dispositivos temporários para uso do administrador)
+
+**/root**  → usuário root
+
+**/home**  → usuários (cada usuário possui sua pasta)
+
+**/tmp**   → temporário (serve para armazenar arquivos temporários)
+
+**/var**   → variável (geralemnte conteúdo é apagado ao reiniciar o sistema) - possui: /log
     
-    /usr/bin → binários (binários não essenciais: instalação, etc)
-    /usr/sbin → binários adm
-    /usr/lib → bibliotecas (libs usadas pelos /usr/bin e /usr/sbin)
-    /usr/share → independente (arquivos independentes de arquitetura - 32 ou 64 bits)
-    /usr/share/doc → documentação
-    /usr/share/man → manuais
+**/usr/bin** → binários (binários não essenciais: instalação, etc)
+
+**/usr/sbin** → binários adm
+
+**/usr/lib** → bibliotecas (libs usadas pelos /usr/bin e /usr/sbin)
+
+**/usr/share** → independente (arquivos independentes de arquitetura - 32 ou 64 bits)
+
+**/usr/share/doc** → documentação
+
+**/usr/share/man** → manuais
 
 ---
 
