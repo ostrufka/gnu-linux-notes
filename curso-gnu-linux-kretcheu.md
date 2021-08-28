@@ -1,83 +1,97 @@
-**CURSO GNU/LINUX - Kretcheu**
-##############################
+# Curso GNU/Linux - Kretcheu
 
-**Sumário**
-***********
-> Aulas:
-  ^^^^^
-A_001 - Software Livre 
-A_002 - GNU (GNU is not Unix)
-A_003 - Distribuição Debian
-A_004 - Instalar SO
-A_005/6/7 - Instalar Debian
-A_008 - Modelo mental do boot
-A_009 - Princípios do UNIX
-A_011 - FHS - Filesystem Hierarchy Standard
-A_012 - Comandos Básicos - BASH
-A_013 - Editores de texto puro
-A_014 - Manual de sobrevivência no vim
-A_015 - Pacotes
+## Sumário
 
-> Solução de Problemas:
-  ^^^^^^^^^^^^^^^^^^^^
-SP_000 - Redefinir senha do Root
-SP_001 - Shell do GRUB (interpretador de comando)
+### Aulas:
 
-> Tutoriais:
-  ^^^^^^^^^^
-T_000 - Copiar chaves para servidor ssh
-T_001 - Alterar layout/design do prompt do terminal
-T_002 - Instalar Linux-Libre no Debian
-T_003 - Swap em arquivo criptografado
+> [A_001 - Software Livre](#a001)
+> 
+> [A_002 - GNU (GNU is not Unix)](#a002)
+> 
+> [A_003 - Distribuição Debian](#a003)
+> 
+> [A_004 - Instalar SO](#a004)
+> 
+> [A_005 - Instalar Debian](#a005)
+> 
+> [A_008 - Modelo mental do boot](#a008)
+> 
+> [A_009 - Princípios do UNIX](#a009)
+> 
+> [A_011 - FHS - Filesystem Hierarchy Standard](#a011)
+> 
+> [A_012 - Comandos Básicos - BASH](#a012)
+> 
+> [A_013 - Editores de texto puro](#a013)
+> 
+> [A_014 - Manual de sobrevivência no vim](#a014)
+> 
+> [A_015 - Pacotes](#a015)
 
-> Outros:
-  ^^^^^^^
-O_001 - Desvendando Wi-Fi
+### Solução de Problemas:
 
----
----
+> [SP_000 - Redefinir senha do Root](#sp000)
+> 
+> [SP_001 - Shell do GRUB (interpretador de comando)](#sp001)
 
+### Tutoriais:
 
-**A_001 - Software Livre**
-**************************
+> [T_000 - Copiar chaves para servidor ssh](#t000)
+> 
+> [T_001 - Alterar layout/design do prompt do terminal](#t001)
+> 
+> [T_002 - Instalar Linux-Libre no Debian](#t002)
+> 
+> [T_003 - Swap em arquivo criptografado](#t003)
 
-> As 4 liberdades (definem um software livre):
-   0 - Qualquer uso
-   1 - Estudar, adaptar
-   2 - Distribuir cópias
-   3 - Redistribuir melhorias
+### Outros:
 
-> Licenças Livre: 
-   * Copyleft: garante as 4 liberdades (licença é herdada)
-   * Permissiva: garante as 4 liberdades (não necessariamente precisa herdar a licença)
-
-* GPL (GNU Public License) - licença do Linux.
+> [O_001 - Desvendando Wi-Fi](#o001)
 
 ---
+---
 
-**A_002 - GNU (GNU is not Unix)**
-*********************************
+## A_001 - Software Livre <a name="a001"></a>
+
+**As 4 liberdades** (definem um software livre):
+   * 0 - Qualquer uso
+   * 1 - Estudar, adaptar
+   * 2 - Distribuir cópias
+   * 3 - Redistribuir melhorias
+
+**Licenças Livres**: 
+   * **Copyleft**: garante as 4 liberdades (licença é herdada)
+   * **Permissiva**: garante as 4 liberdades (não necessariamente precisa herdar a licença)
+
+> GPL (GNU Public License) - licença do Linux.
+
+---
+
+## A_002 - GNU (GNU is not Unix) <a name="a002"></a>
 
 > Richard Stallman - 1983 (GNU)
+
 > Linus Torvalds - 1991 (Kernel Linux)
 
-> Componentes de um Sistema Operacional: 
+**Principais componentes de um Sistema Operacional**: 
    * Bootloader
    * Kernel
    * Bibliotecas (gcc, glibc, ...)
+   * Serviços/Aplicação
 
-> Blobs - Componentes de software não-livres
+> *Blobs* - Componentes de software não-livres.
 
 ---
 
-**A_003 - Distribuição Debian**
-*******************************
+## A_003 - Distribuição Debian <a name="a003"></a>
 
 > Ian Murdock - 1993 (Debora + Ian)
+
 > 2ª distro mais antiga (Distro mais antiga é o Slackware)
+
 > Grupo de pessoas dão manutenção ao Debian (2000+)
 
-> Debian Free Software Guidelines (DFSG):
+**Debian Free Software Guidelines** (DFSG):
    1. Redistribuição livre
    2. Código fonte
    3. Trabalhos derivados
@@ -89,17 +103,17 @@ O_001 - Desvendando Wi-Fi
    9. A licença não deve contaminar outros softwares
    10. Licença exemplo -> GPL, BSD, ...
 
-> Seções do repositório oficial do Debian:
-   * main - contém apenas software livre (de acordo com a DFSG)
-   * contrib - contém software livre com a funcionalidade de carregar software não-livre
-   * non-free - contém apenas software não-livre
+**Seções do repositório oficial do Debian**:
+   * **main** - contém apenas software livre (de acordo com a DFSG)
+   * **contrib** - contém software livre com a funcionalidade de carregar software não-livre
+   * **non-free** - contém apenas software não-livre
 
-> Etapas do desenvolvimento do Debian (Branches):
-   * Old-stable - Seção contendo pacotes que já possuem novas versões estáveis
-   * Stable - Seção estável que já passou pelas seções Unstable e Testing
-   * Testing - Seção contendo os pacotes que já passaram pela seção Unstable (maturação: ~2 anos)
-   * Unstable (Sid) - Seção contendo os novos pacotes do Debian que ainda estão em testes iniciais
-   * Experimental - Seção usada para testes experimentais
+**Etapas do desenvolvimento do Debian** (Branches):
+   * **Old-stable** - Seção contendo pacotes que já possuem novas versões estáveis
+   * **Stable** - Seção estável que já passou pelas seções Unstable e Testing
+   * **Testing** - Seção contendo os pacotes que já passaram pela seção Unstable (maturação: ~2 anos)
+   * **Unstable** (Sid) - Seção contendo os novos pacotes do Debian que ainda estão em testes iniciais
+   * **Experimental** - Seção usada para testes experimentais
 
 > Arquiteturas suportadas oficialmente: amd64, arm64, armel, armhf, i386, mips64el, mipsel, ppc64el, s390x
 
@@ -107,99 +121,88 @@ O_001 - Desvendando Wi-Fi
 
 ---
 
-**A_004 - Instalar SO**
-***********************
+## A_004 - Instalar SO <a name="a004"></a>
 
-> Firmware do PC:
+**Firmware do PC**:
    * (Firmware/Sistema de Particionamento)
    * BIOS/MBR
    * UEFI/GPT
 
-> Bootloader: programa que roda para permitir que o SO possa ser carregado
-> Instalação: processo de cópia dos arquivos do SO para o HD/SSD da máquina
-> Pendrive bootável: rufus, yumi, balena-edge, comando dd (no Linux)
-> Dual boot: Primeiro instalar Windows, depois Linux (Windows pode dar problema no GRUB)
+> **Bootloader**: programa que roda para permitir que o SO possa ser carregado
+
+> **Instalação**: processo de cópia dos arquivos do SO para o HD/SSD da máquina
+
+> **Pendrive bootável**: rufus, yumi, balena-edge, comando dd (no Linux)
+
+> **Dual boot**: Primeiro instalar Windows, depois Linux (Windows pode dar problema no GRUB)
 
 ---
 
-**A_005/6/7 - Instalar Debian**
-*******************************
+## A_005 - Instalar Debian <a name="a005"></a>
 
-> Durante a instalação no modo gráfico, digitar:
+**Durante a instalação no modo gráfico, digitar**:
    * CTRL + ALT + F4 para ver a tela de log
    * CTRL + ALT + F2 para acessar um terminal
    * CTRL + ALT + F5 para voltar para o modo gráfico
 
-> Particionamento de disco:
-   * /     -> arquivos de administrador (root) - ext4
-   * /home -> arquivos dos usuários - ext4
-   * swap  -> memória virtual
+**Particionamento de disco**:
+   * **/**     -> arquivos de administrador (root) - ext4
+   * **/home** -> arquivos dos usuários - ext4
+   * **swap**  -> memória virtual
 
 > Problemas de Boot: UEFI ou Legacy
+
 > Problemas de Rede: baixar firmware não-livre (placa de wifi - usar cabo), mais de uma placa de rede (escolher uma), rede que não atribui IP (reconfigurar, IP estático)
+
 > Problemas com GRUB: correto -> UEFI-GPT / BIOS-MBR (usar disco primário caso haja mais de 1)
+
 > Problemas de particionamento: Usar Modo Manual
 
 ---
 
-**A_008 - Modelo mental do boot**
-*********************************
+# A_008 - Modelo mental do boot <a name="a008"></a>
 
-> Firmware:
-   * BIOS -> (Basic Input Output System) - anos 80 (máquinas mais antigas) - Legacy
-   * UEFI -> mais inteligente (conhece sistema de particionamento GPT, DOS, sistema de arquivos FAT; permite arquivos executáveis PE (Portable executable); funciona no modo secure-boot - só carrega o que foi assinado por certificados reconhecidos pela máquina)
-   * Outros: coreboot, libreboot
+**Firmware**:
+   * **BIOS** -> (Basic Input Output System) - anos 80 (máquinas mais antigas) - Legacy
+   * **UEFI** -> mais inteligente (conhece sistema de particionamento GPT, DOS, sistema de arquivos FAT; permite arquivos executáveis PE (Portable executable); funciona no modo secure-boot - só carrega o que foi assinado por certificados reconhecidos pela máquina)
+   * **Outros**: coreboot, libreboot
 
-> Particionamento:
-   * dos/MBR -> 4 partições, max 2TB cada (mais antigo)
-        MBR (Master Boot Record)-> primeiros 512 bytes (stage 0)
-            64 bytes iniciais contém as tabelas de partições
-            446 bytes contém parte do bootloader (stage 1)
-        stage 1,5 -> contém o resto do bootloader
-        Resto do espaço contém as partições em si.
+**Particionamento**:
+   * **dos/MBR**: 4 partições, max 2TB cada (mais antigo)
+        * MBR (Master Boot Record)-> primeiros 512 bytes (stage 0)
+        	* 64 bytes iniciais contém as tabelas de partições
+        	* 446 bytes contém parte do bootloader (stage 1)
+        * stage 1,5 -> contém o resto do bootloader
+        * Resto do espaço contém as partições em si.
 
-                   MBR (512)
-      |----------------------------------|
-       ____________________________________________________________   ____ ... ___
-      |       |                          |                         | | Início das |
-      |stage 0|         stage 1          |        stage 1,5        | | partições  |
-      |_______|__________________________|_________________________| |_____...____| 
-          |                |             `-> 2 bytes: assinatura
-          |                `-> 446 bytes: bootloader
-          `-> 64 bytes: tabela de particionamento DOS
+<img width="400" alt="mbr" src="https://user-images.githubusercontent.com/66706870/131202089-57f4aa26-895a-4277-afda-8eb08e4ed745.png">
 
-   * GPT: GUID (Globally Unique Identifiers) Partition Table -> 128 partições, max 9ZB cada (1ZB = 1 bilhão de TB)
-        Protective MBR (Igual ao MBR anterior)        
-        GPT primária (contém tabela de partições)
-            Primary GPT Header
-            Entry 1 | Entry 2 | Entry 3 | Entry 4
-            Entries 5-128
-        Partições
-            Partition 1
-            Partition 2
-            Remaining Partitions
-        GPT Secundária (cópia da GPT primária - redundância)
-            Entry 1 | Entry 2 | Entry 3 | Entry 4
-            Entries 5-128
-            Secundary GPT Header
+   * **GPT**: GUID (Globally Unique Identifiers) Partition Table -> 128 partições, max 9ZB cada (1ZB = 1 bilhão de TB)
+        * Protective MBR (Igual ao MBR anterior)        
+        * GPT primária (contém tabela de partições)
+        	* Primary GPT Header
+        	* Entry 1 | Entry 2 | Entry 3 | Entry 4
+        	* Entries 5-128
+        * Partições
+        	* Partition 1
+        	* Partition 2
+        	* Remaining Partitions
+        * GPT Secundária (cópia da GPT primária - redundância)
+        	* Entry 1 | Entry 2 | Entry 3 | Entry 4
+        	* Entries 5-128
+        * Secundary GPT Header
 
-                    GPT Primária                                    GPT Secundária
-      |-------------------------------------|               |--------------------------|
-       _________________________________________________...____________________________
-      |Protective| Primary  |Entries|Entries|Part|Part|Other|Entries|Entries|Secondary |
-      |   MBR    |GPT Header|  1-4  | 5-128 |  1 |  2 |Parts|  1-4  | 5-128 |GPT Header|
-      |__________|__________|_______|_______|____|____|_..._|_______|_______|__________|
+<img width="400" alt="gpt" src="https://user-images.githubusercontent.com/66706870/131202341-190626e9-8288-4bf8-8071-438fc0d0ff7f.png">
 
-
-> Bootloader:
+**Bootloader**:
    * GRUB (uefi) - grub4.efi + módulos (/boot)
 
-> Kernel:
+**Kernel**:
    * /vmlinuz (é um arquivo compactado)
    * /boot/vmlinuz-5.6.13-gnu (5~15MB) -> built-in
    * módulos - ~300MB
 
-> Initrd:
+**Initrd**:
    * /initrd.img (imagem de disco inicial)
    * /boot/initrd.img-5.6.13-gnu (8~20MB)
    * possui módulos do kernel que não estão built-in
@@ -238,8 +241,7 @@ POST    shim        kernel ----------------» init
 
 ---
 
-**A_009 - Princípios do UNIX**
-******************************
+## A_009 - Princípios do UNIX <a name="a009"></a>
 
 1965 -> Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
 1969 -> Unics (Depois renomeado para Unix) - Linguagem Assembly
@@ -255,8 +257,7 @@ POST    shim        kernel ----------------» init
 
 ---
 
-**A_011 - FHS - Filesystem Hierarchy Standard**
-***********************************************
+## A_011 - FHS - Filesystem Hierarchy Standard <a name="a011"></a>
 
 REF: [https://refspecs.linuxfoundation.org/fhs.shtml]
      [https://www.debian.org/releases/stable/amd64/apcs02.en.html]
@@ -290,8 +291,7 @@ REF: [https://refspecs.linuxfoundation.org/fhs.shtml]
 
 ---
 
-**A_012 - Comandos Básicos - BASH**
-***********************************
+## A_012 - Comandos Básicos - BASH <a name="a012"></a>
 
 REF: [http://www.inf.ufpr.br/cursos/ci055/artigos_linux_veteranos/gbbs14.pdf]
      [https://cotidianoti.com.br/Comandos-basicos-linux/]
@@ -346,8 +346,7 @@ _ ___ ___ ___ _ ____ ____ ____ ___ _ _____ ________
 
 ---
 
-**A_013 - Editores de texto puro**
-**********************************
+## A_013 - Editores de texto puro <a name="a013"></a>
 
 > Texto Puro (Plain Text): codificação ASCII (1 byte), unicode (UTF-8 - 1 a 4 bytes)
 > Modo Gráfico: pluma, gedit, geany, kate, kwrite, ...
@@ -356,8 +355,7 @@ _ ___ ___ ___ _ ____ ____ ____ ___ _ _____ ________
 
 ---
 
-**A_014 - Manual de sobrevivência no vim**
-******************************************
+# A_014 - Manual de sobrevivência no vim <a name="a014"></a>
 
 REF: [https://github.com/calangohc/apresentacoes/tree/master/vim-magnun]
      [https://www.youtube.com/watch?v=Efh3OTnG74E]
@@ -432,23 +430,17 @@ $ → vai pro final da linha
 
 ---
 
-**A_015 - Pacotes**
-*******************
+## A_015 - Pacotes <a name="a015"></a>
 
 REF: []
 
 
 ---
+---
+---
 
-############################################
-############################################
-############################################
-############################################
-############################################
+## SP_000 - Redefinir senha do Root <a name="sp000"></a>
 
-
-**SP_000 - Redefinir senha do Root**
-************************************
 > Redefinir senha do root pelo GRUB. 
 
 1. Na tela do GRUB, digitar "e" 
@@ -464,8 +456,8 @@ OBS: Com acesso físico a maquina, não há segurança, pois é possível mudar 
 
 ---
 
-**SP_001 - Shell do GRUB (interpretador de comando)**
-*****************************************************
+## SP_001 - Shell do GRUB (interpretador de comando) <a name="sp001"></a>
+
 > GRUB não encontra o arquivo de configuração e abre o shell do GRUB. O que fazer?
 
 `grub> set pager=1` > Configura paginador no grub
@@ -495,16 +487,11 @@ OBS: Após entrar no sistema, ir no terminal e digitar o comando de atualizaçã
 `shutdown -r now`
 
 ---
+---
+---
 
-############################################
-############################################
-############################################
-############################################
-############################################
+## T_000 - Copiar chaves para servidor ssh <a name="t000"></a>
 
-
-**T_000 - Copiar chaves para servidor ssh**
-*******************************************
 REF: [https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/copiar.chave.md]
 
 > Copiar chave criptográfica para logar sem senha num servidor ssh:
@@ -539,8 +526,7 @@ No PC cliente:
 
 ---
 
-**T_001 - Alterar layout/design do prompt do terminal**
-*******************************************************
+## T_001 - Alterar layout/design do prompt do terminal <a name="t001"></a>
 
 > Para todos os usuários: /etc/bash.bashrc
 > Para um usuário:       ~/.bashrc
@@ -551,8 +537,7 @@ Modificar variável PS1
 
 ---
 
-**T_002 - Instalar Linux-Libre no Debian**
-******************************************
+## T_002 - Instalar Linux-Libre no Debian <a name="t002"></a>
 
 > Editar /etc/apt/source.list e adicionar linha abaixo:
 `deb http://linux-libre.fsfla.org/pub/linux-libre/freesh/ freesh main`
@@ -578,8 +563,7 @@ Modificar variável PS1
 
 ---
 
-**T_003 - Swap em arquivo criptografado**
-*****************************************
+## T_003 - Swap em arquivo criptografado <a name="t003"></a>
 
 REF: [https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/swap.criptografado.md]
      [https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/swap.on.file.criptografado.md]
@@ -636,16 +620,10 @@ cswap         /swapfile       /dev/urandom  swap,cipher=aes-xts-plain64,size=256
 `update-initramfs -u -k all`
 
 ---
+---
+---
 
-###############################################################
-
-###############################################################
-
-###############################################################
-
-
-**O_001 - Desvendando Wi-Fi**
-*****************************
+## O_001 - Desvendando Wi-Fi <a name="o001"></a>
 
 REF: [https://www.youtube.com/watch?v=Dyhmj57B_U8]
  ___________________________
