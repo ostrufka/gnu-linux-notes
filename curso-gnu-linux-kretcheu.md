@@ -1,77 +1,76 @@
-# Curso GNU/Linux - Kretcheu
+# **Curso GNU/Linux - Kretcheu**
 
-## Sumário
+## **Sumário**
 
-### Aulas:
+### **Aulas**:
 
 > [A_001 - Software Livre](#a001)
-> 
+
 > [A_002 - GNU (GNU is not Unix)](#a002)
-> 
+
 > [A_003 - Distribuição Debian](#a003)
-> 
+
 > [A_004 - Instalar SO](#a004)
-> 
+
 > [A_005 - Instalar Debian](#a005)
-> 
+
 > [A_008 - Modelo mental do boot](#a008)
-> 
+
 > [A_009 - Princípios do UNIX](#a009)
-> 
+
 > [A_011 - FHS - Filesystem Hierarchy Standard](#a011)
-> 
+
 > [A_012 - Comandos Básicos - BASH](#a012)
-> 
+
 > [A_013 - Editores de texto puro](#a013)
-> 
+
 > [A_014 - Manual de sobrevivência no vim](#a014)
-> 
+
 > [A_015 - Pacotes](#a015)
 
-### Solução de Problemas:
+### **Solução de Problemas**:
 
 > [SP_000 - Redefinir senha do Root](#sp000)
-> 
+
 > [SP_001 - Shell do GRUB (interpretador de comando)](#sp001)
 
-### Tutoriais:
+### **Tutoriais**:
 
 > [T_000 - Copiar chaves para servidor ssh](#t000)
-> 
+
 > [T_001 - Alterar layout/design do prompt do terminal](#t001)
-> 
+
 > [T_002 - Instalar Linux-Libre no Debian](#t002)
-> 
+
 > [T_003 - Swap em arquivo criptografado](#t003)
 
-### Outros:
+### **Outros**:
 
 > [O_001 - Desvendando Wi-Fi](#o001)
 
----
 ---
 
 ## A_001 - Software Livre <a name="a001"></a>
 
 **As 4 liberdades** (definem um software livre):
-   * 0 - Qualquer uso
-   * 1 - Estudar, adaptar
-   * 2 - Distribuir cópias
-   * 3 - Redistribuir melhorias
+   * 0 → Qualquer uso
+   * 1 → Estudar, adaptar
+   * 2 → Distribuir cópias
+   * 3 → Redistribuir melhorias
 
 **Licenças Livres**: 
    * **Copyleft**: garante as 4 liberdades (licença é herdada)
    * **Permissiva**: garante as 4 liberdades (não necessariamente precisa herdar a licença)
 
-> GPL (GNU Public License) - licença do Linux.
+ GPL (GNU Public License) - licença do Linux.
 
 ---
 
 ## A_002 - GNU (GNU is not Unix) <a name="a002"></a>
 
-> Richard Stallman - 1983 (GNU)
+Richard Stallman - 1983 (GNU)
 
-> Linus Torvalds - 1991 (Kernel Linux)
+Linus Torvalds - 1991 (Kernel Linux)
 
 **Principais componentes de um Sistema Operacional**: 
    * Bootloader
@@ -79,17 +78,17 @@
    * Bibliotecas (gcc, glibc, ...)
    * Serviços/Aplicação
 
-> *Blobs* - Componentes de software não-livres.
+*Blobs* - Componentes de software não-livres.
 
 ---
 
 ## A_003 - Distribuição Debian <a name="a003"></a>
 
-> Ian Murdock - 1993 (Debora + Ian)
+Ian Murdock - 1993 (Debora + Ian)
 
-> 2ª distro mais antiga (Distro mais antiga é o Slackware)
+2ª distro mais antiga (Distro mais antiga é o Slackware)
 
-> Grupo de pessoas dão manutenção ao Debian (2000+)
+Grupo de pessoas dão manutenção ao Debian (2000+)
 
 **Debian Free Software Guidelines** (DFSG):
    1. Redistribuição livre
@@ -115,9 +114,9 @@
    * **Unstable** (Sid) - Seção contendo os novos pacotes do Debian que ainda estão em testes iniciais
    * **Experimental** - Seção usada para testes experimentais
 
-> Arquiteturas suportadas oficialmente: amd64, arm64, armel, armhf, i386, mips64el, mipsel, ppc64el, s390x
+**Arquiteturas suportadas oficialmente**: amd64, arm64, armel, armhf, i386, mips64el, mipsel, ppc64el, s390x
 
-> Versão atual (2021): Debian 11 - bullseye
+Versão atual (2021): Debian 11 - bullseye
 
 ---
 
@@ -128,13 +127,12 @@
    * BIOS/MBR
    * UEFI/GPT
 
-> **Bootloader**: programa que roda para permitir que o SO possa ser carregado
+**Bootloader**: programa que roda para permitir que o SO possa ser carregado
 
-> **Instalação**: processo de cópia dos arquivos do SO para o HD/SSD da máquina
+**Instalação**: processo de cópia dos arquivos do SO para o HD/SSD da máquina
 
-> **Pendrive bootável**: rufus, yumi, balena-edge, comando dd (no Linux)
-
-> **Dual boot**: Primeiro instalar Windows, depois Linux (Windows pode dar problema no GRUB)
+**Pendrive bootável**: rufus, yumi, balena-edge, comando dd (no Linux)
+**Dual boot**: Primeiro instalar Windows, depois Linux (Windows pode dar problema no GRUB)
 
 ---
 
@@ -150,13 +148,13 @@
    * **/home** -> arquivos dos usuários - ext4
    * **swap**  -> memória virtual
 
-> Problemas de Boot: UEFI ou Legacy
+Problemas de **Boot**: UEFI ou Legacy
 
-> Problemas de Rede: baixar firmware não-livre (placa de wifi - usar cabo), mais de uma placa de rede (escolher uma), rede que não atribui IP (reconfigurar, IP estático)
+Problemas de **Rede**: baixar firmware não-livre (placa de wifi - usar cabo), mais de uma placa de rede (escolher uma), rede que não atribui IP (reconfigurar, IP estático)
 
-> Problemas com GRUB: correto -> UEFI-GPT / BIOS-MBR (usar disco primário caso haja mais de 1)
+Problemas com **GRUB**: correto -> UEFI-GPT / BIOS-MBR (usar disco primário caso haja mais de 1)
 
-> Problemas de particionamento: Usar Modo Manual
+Problemas de **particionamento**: Usar Modo Manual
 
 ---
 
@@ -216,17 +214,20 @@
    * Verifica a presença e conteúdo da BIOS
    * Geralmente sinaliza problemas por BIPS sonoros
 
-> Com BIOS:
+*Com BIOS*:
+
 2. Roda programas da BIOS (roda outros testes) - verifica qual é o primeiro dispositivo de boot (até achar MBR)
 
 3. BIOS acessa conteúdo do MBR (Master Boot Record - 446 bytes localizados no primeiro dispositivo da memória) - Objetivo do MBR é carregar o GRUB
 
 4. GRUB é o bootloader
 
-> Com UEFI:
+*Com UEFI*:
+
 2. Roda programas da UEFI (programa executável no formato PE) -> UEFI consegue rodar o GRUB diretamente. Se tiver secure-boot, a UEFI roda o shim (pré-bootloader assinado digitalmente que acessa o GRUB). É possível que a UEFI carregue diretamente o kernel + initrd sem precisar de GRUB
 
-> Ambos:
+*Ambos*:
+
 5. GRUB procura por um arquivo de configuração (+ módulos GRUB) e carrega o initrd e prepara um sistema de arquivos virtual. Além disso, o GRUB também carrega o kernel. O kernel em funcionamento monta o sistema de arquivos virtual na sua estrutura de diretórios. No FS virtual existe um script chamado "init" que permite com que o kernel carregue alguns módulos necessários para montar o FS real.
 
 6. Com o diretório / montado, o primeiro programa a rodar é o systemd, que coloca todos os serviços configurados em funcionamento.
@@ -235,11 +236,11 @@
 
 ## A_009 - Princípios do UNIX <a name="a009"></a>
 
-> 1965 -> Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
+**1965** -> Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
 
-> 1969 -> Unics (Depois renomeado para Unix) - Linguagem Assembly
+**1969** -> Unics (Depois renomeado para Unix) - Linguagem Assembly
 
-> 1973 -> Unix - Linguagem C
+**1973** -> Unix - Linguagem C
 
 **Ideias**:
    * Programas devem fazer uma única coisa, mas fazer isso muito bem! (keep it simple)
@@ -253,14 +254,17 @@
 
 ## A_011 - FHS - Filesystem Hierarchy Standard <a name="a011"></a>
 
-REF: [https://refspecs.linuxfoundation.org/fhs.shtml]
-     [https://www.debian.org/releases/stable/amd64/apcs02.en.html]
+References: 
+[Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/fhs.shtml) 
+/
+[The Directory Tree](https://www.debian.org/releases/stable/amd64/apcs02.en.html)
 
-> Origem: 1996, comunidade BSD 
 
-> Objetivo: Uniformização (sistemas Unix-like)
+*Origem*: 1996, comunidade BSD 
 
-> Mantido hoje pela Linux Foundation
+*Objetivo*: Uniformização (sistemas Unix-like)
+
+Mantido hoje pela Linux Foundation
 
 **Principais Diretórios**:
 
@@ -308,78 +312,118 @@ REF: [https://refspecs.linuxfoundation.org/fhs.shtml]
 
 ## A_012 - Comandos Básicos - BASH <a name="a012"></a>
 
-REF: [http://www.inf.ufpr.br/cursos/ci055/artigos_linux_veteranos/gbbs14.pdf]
-     [https://cotidianoti.com.br/Comandos-basicos-linux/]
+References: 
+[Tutorial do Bash](http://www.inf.ufpr.br/cursos/ci055/artigos_linux_veteranos/gbbs14.pdf)
+/
+[Comandos Básicos no Linux](https://cotidianoti.com.br/Comandos-basicos-linux/)
 
-clear  → limpa terminal (CTRL + L)
-pwd    → mostra caminho absoluto do diretório corrente
-cd     → change directory
-ls     → list (opções: -alhrt)
-cp     → copy
-mv     → move (move, muda nome ou atualiza informações sobre um arquivo/dict - hora da última atualização)
-rm     → remove
-mkdir  → make directory
-rmdir  → remove directory (only empty directories)
-rm -rf → remove directory recursive (and all its contents)
-cat    → mostra conteúdo do stdout de um programa ou conteúdo de um arquivo (opções: -n (numero de linhas))
-less   → mostra conteúdo de um arquivo de forma paginada
-    pesquisa: /
-    sair: q
-grep   → filtro - Ex: grep chave arquivo.txt (permite regex)
-find   → procura - Ex: find /home -name filename 
-tail   → mostra últimas linhas de texto de um arquivo (-)
-head   → mostra primeiras linhas de texto de um arquivo
-wc     → conta numero de linhas, palavras e caracteres de um arquivo (opções: -lwc)
+**clear**  → limpa terminal (CTRL + L)
 
---help → mostra principais opções e formas de usar programa
-man    → mostra manual mais detalhado do programa
+**pwd**    → mostra caminho absoluto do diretório corrente
 
-|      → pipe - saída de um programa (stdout) é a entrada de outro (stdin)
->      → redireciona stdout (reescreve todo o arquivo que recebe)
-2>     → redireciona stderr (/dev/null - diretório para ignorar)
->>     → append (adiciona no arquivo sem apagar o que já existe)
-*      → caractere coringa (qualquer coisa)
-.      → diretório atual
-..     → diretório pai do atual (anterior)
--      → último diretório que estava
+**cd**     → change directory
 
-> Permissões: `ls -l`
-d rwx r-x r-x 1 user user 4096 mai 9 01:44 file.txt
-_ ___ ___ ___ _ ____ ____ ____ ___ _ _____ ________
-|  |   |   |  |   |    |    |   |  |   |      `→ nome do arquivo
-|  |   |   |  |   |    |    |   |  |   `→ hora última modificação
-|  |   |   |  |   |    |    |   |  `→ dia última modificação
-|  |   |   |  |   |    |    |   `→ mês última modificação
-|  |   |   |  |   |    |    `→ tamanho do arquivo (bytes)
-|  |   |   |  |   |    `→ grupo de usuário dono do arquivo
-|  |   |   |  |   `→ usuário que criou o arquivo (dono)
-|  |   |   |  `→ níveis de diretórios
-|  |   |   `→ permissão para outros usuários
-|  |   `→ permissão para usuários pertencente ao grupo de usuário
-|  `→ permissão para o dono (criador) do arquivo
-`→ tipo de arquivo (d=directory / -=arquivo / l=symbolic link)
+**ls**     → list (opções: -alhrt)
+
+**cp**     → copy
+
+**mv**     → move (move, muda nome ou atualiza informações sobre um arquivo/dict - hora da última atualização)
+
+**rm**     → remove
+
+**mkdir**  → make directory
+
+**rmdir**  → remove directory (only empty directories)
+
+**rm -rf** → remove directory recursive (and all its contents)
+
+**cat**    → mostra conteúdo do stdout de um programa ou conteúdo de um arquivo (opções: -n (numero de linhas))
+
+**less**   → mostra conteúdo de um arquivo de forma paginada
+    :pesquisa: /  
+    :sair: q
+
+**grep**   → filtro - Ex: grep chave arquivo.txt (permite regex)
+
+**find**   → procura - Ex: find /home -name filename 
+
+**tail**   → mostra últimas linhas de texto de um arquivo (-)
+
+**head**   → mostra primeiras linhas de texto de um arquivo
+
+**wc**     → conta numero de linhas, palavras e caracteres de um arquivo (opções: -lwc)
+
+---
+
+*--help* → mostra principais opções e formas de usar programa
+
+*man*    → mostra manual mais detalhado do programa
+
+---
+
+**|**      → pipe - saída de um programa (stdout) é a entrada de outro (stdin)
+
+**>**      → redireciona stdout (reescreve todo o arquivo que recebe)
+
+**2>**     → redireciona stderr (/dev/null - diretório para ignorar)
+
+**>>**     → append (adiciona no arquivo sem apagar o que já existe)
+
+__*__      → caractere coringa (qualquer coisa)
+
+**.**      → diretório atual
+
+**..**     → diretório pai do atual (anterior)
+
+**-**      → último diretório que estava
+
+---
+
+Permissões: `ls -l`
+
+**d rwx r-x r-x 1 user user 4096 mai 9  01:44 file.txt**
+
+1---2---3--4--5--6---7----8----9--10---11----12
+
+1. Tipo de arquivo (d=directory / -=arquivo / l=symbolic link)
+2. Permissão para o dono (criador) do arquivo
+3. Permissão para usuários pertencente ao grupo de usuário
+4. Permissão para outros usuários
+5. Níveis de diretórios
+6. Usuário que criou o arquivo (dono)
+7. Grupo de usuário dono do arquivo
+8. Tamanho do arquivo (bytes)
+9. Mês última modificação
+10. Dia última modificação
+11. Hora última modificação
+12. Nome do arquivo
 
 ---
 
 ## A_013 - Editores de texto puro <a name="a013"></a>
 
-> Texto Puro (Plain Text): codificação ASCII (1 byte), unicode (UTF-8 - 1 a 4 bytes)
-> Modo Gráfico: pluma, gedit, geany, kate, kwrite, ...
-> Modo Texto (terminal): vi, vim-basic, vim (gtk), nvi, nano, mcedit, ...
-> GNU Emacs (Richard Stallman) - linguagem Lisp 
+* **Texto Puro** (Plain Text): codificação ASCII (1 byte), unicode (UTF-8 - 1 a 4 bytes)
+
+* **Modo Gráfico**: pluma, gedit, geany, kate, kwrite, ...
+
+* **Modo Texto** (terminal): vi, vim-basic, vim (gtk), nvi, nano, mcedit, ...
+
+* **GNU Emacs** (Richard Stallman) - linguagem Lisp 
 
 ---
 
-# A_014 - Manual de sobrevivência no vim <a name="a014"></a>
+## A_014 - Manual de sobrevivência no vim <a name="a014"></a>
 
-REF: [https://github.com/calangohc/apresentacoes/tree/master/vim-magnun]
-     [https://www.youtube.com/watch?v=Efh3OTnG74E]
+References: 
+[Github - calangohc/apresentacoes](https://github.com/calangohc/apresentacoes/tree/master/vim-magnun)
+/
+[YouTube](https://www.youtube.com/watch?v=Efh3OTnG74E)
 
-> Modos de Operação:
-   * Comando (normal) → serve para navegar no conteúdo do arquivo
-   * Inserção → serve para inserir/editar o texto do arquivo
-   * Visual → seleção visual do texto
-   * Linha de Comando → pode escrever comandos para processar texto
+**Modos de Operação**:
+   * **Comando** (normal) → serve para navegar no conteúdo do arquivo
+   * **Inserção** → serve para inserir/editar o texto do arquivo
+   * **Visual** → seleção visual do texto
+   * **Linha de Comando** → pode escrever comandos para processar texto
 
  __________               ___________              ____________
 |          |    esc  →   |           |  a, i, o → |            |
