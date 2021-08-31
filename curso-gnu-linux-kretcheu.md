@@ -144,38 +144,38 @@ Versão atual (2021): Debian 11 - bullseye
    * CTRL + ALT + F5 para voltar para o modo gráfico
 
 **Particionamento de disco**:
-   * **/**     -> arquivos de administrador (root) - ext4
-   * **/home** -> arquivos dos usuários - ext4
-   * **swap**  -> memória virtual
+   * **/**     → arquivos de administrador (root) - ext4
+   * **/home** → arquivos dos usuários - ext4
+   * **swap**  → memória virtual
 
 Problemas de **Boot**: UEFI ou Legacy
 
 Problemas de **Rede**: baixar firmware não-livre (placa de wifi - usar cabo), mais de uma placa de rede (escolher uma), rede que não atribui IP (reconfigurar, IP estático)
 
-Problemas com **GRUB**: correto -> UEFI-GPT / BIOS-MBR (usar disco primário caso haja mais de 1)
+Problemas com **GRUB**: correto → UEFI-GPT / BIOS-MBR (usar disco primário caso haja mais de 1)
 
 Problemas de **particionamento**: Usar Modo Manual
 
 ---
 
-# A_008 - Modelo mental do boot <a name="a008"></a>
+## A_008 - Modelo mental do boot <a name="a008"></a>
 
 **Firmware**:
-   * **BIOS** -> (Basic Input Output System) - anos 80 (máquinas mais antigas) - Legacy
-   * **UEFI** -> mais inteligente (conhece sistema de particionamento GPT, DOS, sistema de arquivos FAT; permite arquivos executáveis PE (Portable executable); funciona no modo secure-boot - só carrega o que foi assinado por certificados reconhecidos pela máquina)
+   * **BIOS** → (Basic Input Output System) - anos 80 (máquinas mais antigas) - Legacy
+   * **UEFI** → mais inteligente (conhece sistema de particionamento GPT, DOS, sistema de arquivos FAT; permite arquivos executáveis PE (Portable executable); funciona no modo secure-boot - só carrega o que foi assinado por certificados reconhecidos pela máquina)
    * **Outros**: coreboot, libreboot
 
 **Particionamento**:
    * **dos/MBR**: 4 partições, max 2TB cada (mais antigo)
-        * MBR (Master Boot Record)-> primeiros 512 bytes (stage 0)
+        * MBR (Master Boot Record) → primeiros 512 bytes (stage 0)
         	* 64 bytes iniciais contém as tabelas de partições
         	* 446 bytes contém parte do bootloader (stage 1)
-        * stage 1,5 -> contém o resto do bootloader
+        * stage 1,5 → contém o resto do bootloader
         * Resto do espaço contém as partições em si.
 
 <img width="400" alt="mbr" src="https://user-images.githubusercontent.com/66706870/131202089-57f4aa26-895a-4277-afda-8eb08e4ed745.png">
 
-   * **GPT**: GUID (Globally Unique Identifiers) Partition Table -> 128 partições, max 9ZB cada (1ZB = 1 bilhão de TB)
+   * **GPT**: GUID (Globally Unique Identifiers) Partition Table → 128 partições, max 9ZB cada (1ZB = 1 bilhão de TB)
         * Protective MBR (Igual ao MBR anterior)        
         * GPT primária (contém tabela de partições)
         	* Primary GPT Header
@@ -236,11 +236,11 @@ Problemas de **particionamento**: Usar Modo Manual
 
 ## A_009 - Princípios do UNIX <a name="a009"></a>
 
-**1965** -> Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
+**1965** → Multics - Ken Thompson (criou linguagem B e Go) e Dennis Ritchie - Bell Labs, MIT, AT&T
 
-**1969** -> Unics (Depois renomeado para Unix) - Linguagem Assembly
+**1969** → Unics (Depois renomeado para Unix) - Linguagem Assembly
 
-**1973** -> Unix - Linguagem C
+**1973** → Unix - Linguagem C
 
 **Ideias**:
    * Programas devem fazer uma única coisa, mas fazer isso muito bem! (keep it simple)
@@ -425,67 +425,82 @@ References:
    * **Visual** → seleção visual do texto
    * **Linha de Comando** → pode escrever comandos para processar texto
 
- __________               ___________              ____________
-|          |    esc  →   |           |  a, i, o → |            |
-|  visual  |             |  comando  |            |  inserção  |
-|__________| ← CTRL + v  |___________|    ← esc   |____________|
-                ou  V     ↓ :   ↑ esc
-                          ___________
-                         |           |
-                         | linha de  |     
-                         |  comando  |
-                         |___________|
+<img width="500" alt="modos_vim" src="https://user-images.githubusercontent.com/66706870/131585858-88a79511-d4a8-47b3-b510-b067815ffc39.png">
 
+**Arquivo de Configuração**:
 
-> Editar arquivo de configuração padrão do vim:
-`sudo nano /etc/vim/vimrc`
-> Descomendar:
-`syntax on`
-`set background=dark`
+1. Editar arquivo de configuração padrão do vim:
 
-* Chamada do programa: [vi|vim] [file]
+   `sudo nano /etc/vim/vimrc`
 
-> Comandos do modo COMANDO:
+2. Descomendar:
 
-y + y : copia linha que o cursor está em cima (yunk)
-2 + y + ↑ : copia a linha atual + 2 linha acima dela
+   `syntax on`
 
-p : cola o que foi copiado na linha abaixo de onde o cursor está em cima (paste)
-SHIFT + p : cola o que foi copiado na linha acima de onde o cursor está em cima
+   `set background=dark`
 
-d + d : deleta linha que o cursor está em cima (delete)
-2 + d + ↑ : deleta a linha atual + 2 linha acima dela
+Chamada do programa:  `[vi|vim] [file]`
 
-u : desfazer último comando (undo)
-CTRL + r : refazer último comando (redo)
+**MODO DE _COMANDO_**:
 
-i: entra no modo de INSERÇÃO (cursor fica exatamente onde está)
-a: entra no modo de INSERÇÃO (cursor vai um caractere para a direita)
-o: entra no modo de INSERÇÃO e cria uma nova linha a abaixo da linha onde o cursor estava (cursor fica no início desta nova linha)
+**y + y** : copia linha que o cursor está em cima (yunk)
 
-g + g : vai para a primeira linha do arquivo
-SHIFT + g : vai para a última linha do arquivo
-50 + % : vai pra metade do arquivo (percentagem que quiser)
-/ + <palavra_pesquisada>: pesquisa se existe alguma linha com a palavra buscada
-    n : busca linhas encontradar navegando para baixo
-    SHIFT + n : busca linhas encontradar navegando para baixo
+**2 + y + ↑** : copia a linha atual + 2 linha acima dela
 
-v (entra no modo visual) + seleciona trecho de texto + y → copiar seleção de texto
-v (entra no modo visual) + seleciona trecho de texto + d → deletar seleção de texto
-CTRL + v + seleciona pro lado e pra baixo → seleção por bloco
+**p** : cola o que foi copiado na linha abaixo de onde o cursor está em cima (paste)
 
-w → avança o cursor palavra por palavra
-$ → vai pro final da linha
-^^ → vai pro começo da linha
+**SHIFT + p** : cola o que foi copiado na linha acima de onde o cursor está em cima
 
-> Comandos do modo LINHA DE COMANDO:
+**d + d** : deleta linha que o cursor está em cima (delete)
 
-:x  → salvar conteúdo do arquivo e fechar programa (:wq)
-:w  → salvar conteúdo do arquivo sem fechar programa
-:q  → sair sem salvar (quando o arquivo não foi alterado)
-:q! → sair sem salvar mesmo se houver alteração no arquivo
+**2 + d + ↑** : deleta a linha atual + 2 linha acima dela
 
-:%s/string1/string2/g → substituir string1 por string2 de forma global (g)
+**u** : desfazer último comando (undo)
+
+**CTRL + r** : refazer último comando (redo)
+
+**g + g** : vai para a primeira linha do arquivo
+
+**SHIFT + g** : vai para a última linha do arquivo
+
+**50 + %** : vai pra metade do arquivo (percentagem que quiser)
+
+**/ + _<palavra_pesquisada>_** : pesquisa se existe alguma linha com a palavra buscada
+    
+    n : busca linhas encontradas navegando para baixo
+    SHIFT + n : busca linhas encontradas navegando para baixo
+
+**v** (entra no modo visual) + seleciona trecho de texto + **y** → copiar seleção de texto
+
+**v** (entra no modo visual) + seleciona trecho de texto + **d** → deletar seleção de texto
+
+**CTRL + v** + seleciona pro lado e pra baixo → seleção por bloco
+
+**w** → avança o cursor palavra por palavra
+
+**$** → vai pro final da linha
+
+**^^** → vai pro começo da linha
+
+> *Ir para modo de __INSERÇÃO__*:
+
+**i** : entra no modo de INSERÇÃO (cursor fica exatamente onde está)
+
+**a**: entra no modo de INSERÇÃO (cursor vai um caractere para a direita)
+
+**o**: entra no modo de INSERÇÃO e cria uma nova linha a abaixo da linha onde o cursor estava (cursor fica no início desta nova linha)
+
+**MODO DE _LINHA DE COMANDO_**:
+
+**:x**  → salvar conteúdo do arquivo e fechar programa (:wq)
+
+**:w** → salvar conteúdo do arquivo sem fechar programa
+
+**:q** → sair sem salvar (quando o arquivo não foi alterado)
+
+**:q!** → sair sem salvar mesmo se houver alteração no arquivo
+
+**:%s/string1/string2/g** → substituir _string1_ por _string2_ de forma global (g)
 
 ---
 
@@ -500,49 +515,69 @@ REF: []
 
 ## SP_000 - Redefinir senha do Root <a name="sp000"></a>
 
-> Redefinir senha do root pelo GRUB. 
+Redefinir senha do root pelo GRUB:
 
-1. Na tela do GRUB, digitar "e" 
-2. Na linha contendo 'linux', substituir "ro quiet" por "rw init=/bin/bash"
-3. Apertar "F10" para dar boot
-4. Feito isso, após o boot o terminal irá abrir já no modo root
-   Digite o comando 
-   `passwd`
+1. Na tela do GRUB, digitar **"e"**
+2. Na linha contendo 'linux', substituir `ro quiet` por `rw init=/bin/bash`
+3. Apertar **"F10"** para dar boot
+4. Feito isso, após o boot o terminal irá abrir já no modo root:
+
+   Digite o comando `passwd`
+
    Digite a nova senha 2 vezes
-5. (CTRL + ALT + DELETE) para dar reboot na máquina
 
-OBS: Com acesso físico a maquina, não há segurança, pois é possível mudar a senha de root!
+5. (**CTRL + ALT + DELETE**) para dar reboot na máquina
+
+**OBS**: Com acesso físico a maquina, não há segurança, pois é possível mudar a senha de root!
 
 ---
 
 ## SP_001 - Shell do GRUB (interpretador de comando) <a name="sp001"></a>
 
-> GRUB não encontra o arquivo de configuração e abre o shell do GRUB. O que fazer?
+GRUB não encontra o arquivo de configuração e abre o shell do GRUB. O que fazer?
 
-`grub> set pager=1` > Configura paginador no grub
-`grub> help`        > Mostra todos os comandos do shell do grub
+`grub> set pager=1` → Configura paginador no grub
+
+`grub> help`        → Mostra todos os comandos do shell do grub
 
 1. Descobrir quais partições existem:
-`ls`
-Ex: (disco, partição) -> (proc) (hd0) (hd0, gpt2) (hd0, gpt1) (cd0)
-`ls (hd0, gpt1)/`
-Ex: efi/ refind_linux.conf
-`ls (hd0, gpt2)/`
-Ex: lost+found/ boot/ bin lib sbin dev/ etc/ home/ ... (SISTEMA ESTÁ NESTA PARTIÇÃO)
-`ls (hd0, gpt2)/boot/`
-Ex: vmlinuz* (Arquivo de interesse)
 
-2. Descobrir em qual partição do disco deve ser instalado o diretório root "/":
-`cat (hd0, gpt2)/etc/fstab`
+   `ls`
+
+   Ex: *(disco, partição) → (proc) (hd0) (hd0, gpt2) (hd0, gpt1) (cd0)*
+
+   `ls (hd0, gpt1)/`
+
+   Ex: *efi/ refind_linux.conf*
+
+   `ls (hd0, gpt2)/`
+
+   Ex: *lost+found/ boot/ bin lib sbin dev/ etc/ home/* ... (SISTEMA ESTÁ NESTA PARTIÇÃO)
+
+   `ls (hd0, gpt2)/boot/`
+
+   Ex: __vmlinuz*__ (Arquivo de interesse)
+
+2. Descobrir em qual partição do disco deve ser instalado o diretório root **"/"**:
+
+   `cat (hd0, gpt2)/etc/fstab`
+
 3. Comando para carregar o kernel na memória:
-`linux (hd0, gpt2)/boot/vmlinuz-5.6.13.gnu root=/dev/sda0`
-4. Carregar initrd:
-`initrd (hd0, gpt2)/boot/initrd.img-5.6.13.gnu`
-5. Dar boot:
-`boot`
 
-OBS: Após entrar no sistema, ir no terminal e digitar o comando de atualização do grub:
+   `linux (hd0, gpt2)/boot/vmlinuz-5.6.13.gnu root=/dev/sda0`
+
+4. Carregar initrd:
+
+   `initrd (hd0, gpt2)/boot/initrd.img-5.6.13.gnu`
+
+5. Dar boot:
+
+   `boot`
+
+**OBS**: Após entrar no sistema, ir no terminal e digitar o comando de atualização do grub:
+
 `update-grub`
+
 `shutdown -r now`
 
 ---
@@ -551,132 +586,180 @@ OBS: Após entrar no sistema, ir no terminal e digitar o comando de atualizaçã
 
 ## T_000 - Copiar chaves para servidor ssh <a name="t000"></a>
 
-REF: [https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/copiar.chave.md]
+References: [Como usar chave para autenticar em servidor ssh](https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/copiar.chave.md)
 
-> Copiar chave criptográfica para logar sem senha num servidor ssh:
+Copiar chave criptográfica para logar sem senha num servidor ssh:
 
 1. Criar um par de chaves (pública e privada) no PC Cliente:
-`ssh-keygen`
-   Gera uma chave do tipo RSA (padrão: /home/<user>/.ssh/id_rsa)
-   Escolher passphrase para criptografar chaves (SHA256)              ---  Senha : ssh-coreapp
-2. Verificar chaves criadas no diretório .ssh:
-`ls -l /home/<user>/.ssh`
-   id_rsa -> chave privada
-   id_rsa.pub -> chave pública
-3. Copiar a chave pública para o servidor:
-`ssh-copy-id <ip do servidor>`
-Em caso de erro:
-`ssh-keygen -f "/home/<user>/.ssh/known_hosts" -R "<ip do servidor>"`
-Ou copiar usando o comando scp
-4. Acessar o servidor:
-`ssh <user>@<ip do servidor>`
-5. Verificar arquivo criado dentro do diretório .ssh no servidor:
-`ls -l /home/<user>/.ssh`
-   authorized_keys -> arquivo contendo as chaves públicas dos clientes com autorização para acesso ao servidor ssh
 
-> Copiar a chave pública para o /root para acessar servidor como root (não é uma prática muito boa - pode usar "su -" no servidor)
+   `ssh-keygen` → Gera uma chave do tipo RSA (padrão: */home/<user>/.ssh/id_rsa*).
+
+   Escolher passphrase para criptografar chaves (SHA256)
+
+2. Verificar chaves criadas no diretório .ssh:
+
+   `ls -l /home/<user>/.ssh`
+
+   *id_rsa* → chave privada, *id_rsa.pub* → chave pública
+
+3. Copiar a chave pública para o servidor:
+
+   `ssh-copy-id <ip do servidor>`
+
+   Em caso de erro:
+
+   `ssh-keygen -f "/home/<user>/.ssh/known_hosts" -R "<ip do servidor>"`
+
+   Ou copiar usando o comando *scp*
+
+4. Acessar o servidor:
+
+   `ssh <user>@<ip do servidor>`
+
+5. Verificar arquivo criado dentro do diretório .ssh no servidor:
+
+   `ls -l /home/<user>/.ssh`
+
+   *authorized_keys* -> arquivo contendo as chaves públicas dos clientes com autorização para acesso ao servidor ssh
+
+Copiar a chave pública para o /root para acessar servidor como root (não é uma prática muito boa - pode usar "su -" no servidor)
+
 `cat /home/<user>/.ssh/authorized_keys >> /root/.ssh/authorized_keys`
 
-No PC cliente:
-> Acessar o servidor como root
+>No PC cliente:
+
+Acessar o servidor como root:
+
 `ssh root@<ip do servidor>`
-> Adicionar chave privada no agent para não pedir senha ao logar
+
+Adicionar chave privada no agent para não pedir senha ao logar
+
 `ssh-add ~/.ssh/id_rsa`
 
 ---
 
 ## T_001 - Alterar layout/design do prompt do terminal <a name="t001"></a>
 
-> Para todos os usuários: /etc/bash.bashrc
-> Para um usuário:       ~/.bashrc
+* Para todos os usuários: /etc/bash.bashrc
+* Para um usuário:       ~/.bashrc
 
-Modificar variável PS1
+> Modificar variável PS1
 
-* Script com modelos de terminal: [https://libregit.org/kretcheu/devel/src/branch/master/prompt]'
+[Script com modelos de terminal](https://libregit.org/kretcheu/devel/src/branch/master/prompt)
 
 ---
 
 ## T_002 - Instalar Linux-Libre no Debian <a name="t002"></a>
 
-> Editar /etc/apt/source.list e adicionar linha abaixo:
+Editar */etc/apt/source.list* e adicionar linha abaixo:
+
 `deb http://linux-libre.fsfla.org/pub/linux-libre/freesh/ freesh main`
 
-> Baixar chave pública do repositório: 
+Baixar chave pública do repositório:
+
 `wget https://jxself.org/gpg.inc`
 
-> Mostrar a Fingerprint que está no arquivo gpg.inc:
+Mostrar a *Fingerprint* que está no arquivo *gpg.inc*:
+
 `gpg --keyid-format long --with-fingerprint gpg.inc`
 
-> Verificar se confere com a fornecida pelo site oficial:
-# Key finderprint = F611 A908 FFA1 65C6 9958 4ED4 9D0D B31B 545A 2198
+Verificar se confere com a fornecida pelo site oficial:
 
-> Incluir chave pública no chaveiro do apt:
+> *Key finderprint = F611 A908 FFA1 65C6 9958 4ED4 9D0D B31B 545A 2198*
+
+Incluir chave pública no chaveiro do apt:
+
 `apt-key add < gpg.inc`
 
-> Atualizar lista de pacotes dos repositórios apt:
+Atualizar lista de pacotes dos repositórios apt:
+
 `apt update`
 
-> Instalar Linux-Libre:
+Instalar Linux-Libre:
+
 `apt install linux-libre`
+
 `reboot`
 
 ---
 
 ## T_003 - Swap em arquivo criptografado <a name="t003"></a>
 
-REF: [https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/swap.criptografado.md]
-     [https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/swap.on.file.criptografado.md]
+References: [Swap Criptografado](https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/swap.criptografado.md)
+/
+[Usando swap em arquivo criptografado](https://salsa.debian.org/kretcheu/tutoriais/-/blob/master/swap.on.file.criptografado.md)
 
-> Swap - espaço de troca (Memória Virtual).
+**Swap**: espaço de troca (Memória Virtual).
+
 > Memória Total = Memória Física (RAM) + Swap
-> Geralmente swap é colocado em uma partição do disco /dev/sdaX
 
-> É possível encontrar senhas ou informações críticas a partir do swap em partições ou arquivos não criptografados (o comando strings busca linhas de texto contidas dentro de um dispositivo ou arquivo):
-```
-strings /dev/sdaX > arquivo_temporario
-grep senha arquivo_temporario 
-# ou 
-less arquivo_temporario
-```
+Geralmente swap é colocado em uma partição do disco /dev/sdaX
 
-* Swap em arquivo (muito parecido para swap em disco):
--------------------------------------------------------
+* É possível encontrar senhas ou informações críticas a partir do swap em partições ou arquivos não criptografados (o comando strings busca linhas de texto contidas dentro de um dispositivo ou arquivo):
 
-1. Verificar memória disponível
-`free`
-2. Desligar swaps já configurados no disco se existir
-`swapoff -a` 
-# ou 
-`swapoff /dev/sdaX`
-3. Criar arquivo de swap de 3GB (bs = tamanho de bloco) 
-`fallocate -l 3G /swapfile`
-# ou
-`dd if=/dev/zero of=/swapfile bs=1M count=3072`
-4. Colocar permissão de leitura e escrita apenas para root no arquivo de swap
-`chmod 600 /swapfile`
+`strings /dev/sdaX > arquivo_temporario``
 
-5. Editar arquivo de criptografia /etc/crypttab
-```
-#<target name> <source device> <key file>    <options>
-cswap         /swapfile       /dev/urandom  swap,cipher=aes-xts-plain64,size=256,hash=sha1
-```
-6. Editar /etc/fstab (comentar a linha antiga e colocar a nova)
-`/dev/mapper/cswap  none     swap     sw     0      0`
-7. Instalar ferramenta cryptsetup-run
-`apt install cryptsetup-run`
-8. Preparar arquivo para ser swap criptografado
-`cryptdisks_start cswap`
-9. Ativar o swap
-`swapon -a`
+`grep senha arquivo_temporario`
 
-* Mais informações sobre o swap
-`swapon --show`
-# ou
-`swapon --summary`
+ou 
+
+`less arquivo_temporario`
+
+**Swap em arquivo** (muito parecido para swap em disco):
+
+1. Verificar memória disponível:
+
+   `free`
+
+2. Desligar swaps já configurados no disco se existir:
+
+   `swapoff -a` 
+
+   ou 
+
+   `swapoff /dev/sdaX`
+
+3. Criar arquivo de swap de *3GB* (bs = tamanho de bloco):
+
+   `fallocate -l 3G /swapfile`
+
+   ou
+
+   `dd if=/dev/zero of=/swapfile bs=1M count=3072`
+
+4. Colocar permissão de leitura e escrita apenas para root no arquivo de swap:
+
+   `chmod 600 /swapfile`
+
+5. Editar arquivo de criptografia */etc/crypttab*:
+
+   `#<target name> <source device> <key file>    <options>`
+
+   `cswap         /swapfile       /dev/urandom  swap,cipher=aes-xts-plain64,size=256,hash=sha1`
+
+6. Editar */etc/fstab* (comentar a linha antiga e colocar a nova):
+
+   `/dev/mapper/cswap  none     swap     sw     0      0`
+
+7. Instalar ferramenta *cryptsetup-run*:
+
+   `apt install cryptsetup-run`
+
+8. Preparar arquivo para ser swap criptografado:
+
+   `cryptdisks_start cswap`
+
+9. Ativar o swap:
+
+   `swapon -a`
+
+> Mais informações sobre o swap: `swapon --show` ou `swapon --summary`
 
 10. Configurar para que no próximo reboot o swap continue funcionando:
-`echo "RESUME=none" > /etc/initramfs-tools/conf.d/resume`
-`update-initramfs -u -k all`
+
+    `echo "RESUME=none" > /etc/initramfs-tools/conf.d/resume`
+
+    `update-initramfs -u -k all`
 
 ---
 ---
@@ -684,76 +767,80 @@ cswap         /swapfile       /dev/urandom  swap,cipher=aes-xts-plain64,size=256
 
 ## O_001 - Desvendando Wi-Fi <a name="o001"></a>
 
-REF: [https://www.youtube.com/watch?v=Dyhmj57B_U8]
- ___________________________
-|          kernel           |
-|---------------------------|
-| Módulo PCI     Módulo USB |      > Módulos built-in do kernel
-|___________________________|
-      ↓               ↓
-`lspci -nnk`    `lsusb -tv`        > Lista conteúdo do que o kernel 
-* Pacotes: pciutils / usbutils       conseguiu do barramento PCI/USB
-                                     (id, módulo do kernel, ...)
+References: [YouTube](https://www.youtube.com/watch?v=Dyhmj57B_U8)
 
-`modinfo <módulo>`
-* Mostra as inforações de um módulo (no Linux, avisa se precisa de um firmware na placa de Wi-Fi)
-
-> Firmware: código que roda em um processador que não o principal da máquina (não roda pelo SO).
+<img width="500" alt="wifi" src="https://user-images.githubusercontent.com/66706870/131589790-ea07f984-fa0d-4da1-b0c4-058b26f5238d.png">
 
 
-                Driver da placa Wi-Fi no Debian
-                    ___________|____________
-                   |                        |
-                presente                 ausente
-          _________|_________            ___|____
-         | carregar firmware |          | código |
-não, já está na placa       sim        não    compilar
-         2               ____|____               |
-                        |         |          não-livre
-                      livre   não-livre          4
-                        1         3
+* Módulo PCI / Módulo USB: Módulos built-in do kernel
 
-* Exemplo:
+* `lspci -nnk` *(pciutils)* / `lsusb -tv` *(usbutils)*: Lista conteúdo do que o kernel conseguiu do barramento PCI/USB (id, módulo do kernel, ...).
+
+* `modinfo <módulo>`: Mostra as inforações de um módulo (no Linux, avisa se precisa de um firmware na placa de Wi-Fi)
+
+**Firmware**: código que roda em um processador que não o principal da máquina (não roda pelo SO).
+
+<img width="600" alt="driver_wifi" src="https://user-images.githubusercontent.com/66706870/131590244-eca14092-9743-4a24-8cb8-ab310f04bc75.png">
+
+Exemplo:
 `lspci -nnk`
-03:00.0 Network controller [0280]: Realtek Semiconductor Co., Ltd. RTL8723BE PCIe Wireless Network Adapter [10ec:b723]
-	Subsystem: Hewlett-Packard Company RTL8723BE PCIe Wireless Network Adapter [103c:804c]
-	Kernel driver in use: rtl8723be
-	Kernel modules: rtl8723be
-# ID: 10ec:b723 / Módulo: rtl8723be
 
-# CASO 1 ou 3
-Caso haja problemas com o firmware, pesquisar: 
+> 03:00.0 Network controller [0280]: Realtek Semiconductor Co., Ltd. RTL8723BE PCIe Wireless Network Adapter [10ec:b723]
+Subsystem: Hewlett-Packard Company RTL8723BE PCIe Wireless Network Adapter [103c:804c]
+Kernel driver in use: rtl8723be
+Kernel modules: rtl8723be
+
+**ID: 10ec:b723 / Módulo: rtl8723be**
+
+**CASO 1 ou 3**: Caso haja problemas com o firmware, pesquisar: 
+
 Google: debian wiki 10ec:b723 
+
 ou
+
 `grep firm /var/log/syslog | grep fail`
+
 Encontra o nome do firmware (.bin) que o módulo tentou rodar e falhou.
+
 Buscar este nome de firmware no: packages.debian.org (procurar conteúdo dos pacotes)
 
-Se decidir instalar o pacote:
-# Baixar pacote
+Se decidir instalar o pacote: Baixar pacote
+
 `apt install ./firmware-FAB.deb`
+
 ou
-Incluir seção non-free no repo descrito no /etc/apt/source.list
+
+Incluir seção non-free no repo descrito no */etc/apt/source.list*
+
 ```
 deb http://deb.debian.org/debian buster main non-free
 apt update
 apt install firmware-FAB
 ```
 
-Descarrega módulo
+Descarrega módulo:
+
 `modprobe -r nome_do_modulo`
-Carrega o módulo novamente
+
+Carrega o módulo novamente:
+
 `modprobe nome_do_modulo`
-Verificar se módulo carregou o firmware
+
+Verificar se módulo carregou o firmware:
+
 `dmesg | grep firm`
 
-VERIFICAR SE WIFI ESTÁ FUNCIONANDO
-# ip a / ip l / ifconfig / iw dev / iwconfig
+VERIFICAR SE WIFI ESTÁ FUNCIONANDO:
 
-# CASO 4 - compilar firmware
+`ip a | ip l | ifconfig | iw dev | iwconfig`
+
+**CASO 4**: compilar firmware
+
 Baixar fonte/firmware (git clone)
-dkms -> para cada nova versão de kernel, recompila o módulo
-Instalar -> dpkg/apt
+
+dkms → para cada nova versão de kernel, recompila o módulo
+
+Instalar → dpkg/apt
 
 ---
 
